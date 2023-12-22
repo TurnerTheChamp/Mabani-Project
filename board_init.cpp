@@ -128,7 +128,7 @@ class Board
 
 int main() {
     Board obj;
-    int grid[3][3], input;
+    int input;
     cin>>input;
     obj.crop(input);
     obj.rotate();
