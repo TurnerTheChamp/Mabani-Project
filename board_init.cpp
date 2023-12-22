@@ -5,13 +5,16 @@ using namespace std;
 class Board
 {
     const int dim_board = 6;
-    string board[6][6];
+    int board[6][6];
+    private:
+        int grid[3][3];
     public:
         Board() {
             int counter = 0;
             for (int i = 0; i<6; i++) {
                 for (int j = 0; j<6; j++) {
-                    board[i][j]="0";
+                    board[i][j]=counter;
+                    counter++;
                 }
             }
         }
@@ -26,7 +29,7 @@ class Board
                 cout << endl;
             }
         }
-        void crop(int input, string (&grid)[3][3]) {
+        void crop(int input) {
             if(input == 1) {
                 for(int i=0; i<3; i++) {
                     for(int j=0; j<3; j++) {
@@ -66,8 +69,8 @@ class Board
                 }
             }
         }
-        void rotate(string (&grid)[3][3]) {
-            string rotated_grid[3][3];
+        void rotate() {
+            int rotated_grid[3][3];
             for(int i = 0; i<3; i++) {
                 for(int j = 0;  j<3; j++){
                     rotated_grid[i][j] = grid[2-j][i];
@@ -79,7 +82,7 @@ class Board
                 }
             }
         }
-        void join(int input, string grid[3][3]) {
+        void join(int input) {
             if(input == 1) {
                 for(int i=0; i<3; i++) {
                     for(int j=0; j<3; j++) {
@@ -119,15 +122,16 @@ class Board
                 }
             }
         }
+
+
 };
 
 int main() {
     Board obj;
-    string grid[3][3];
-    int input;
+    int grid[3][3], input;
     cin>>input;
-    obj.crop(input, grid);
-    obj.rotate(grid);
-    obj.join(input, grid);
+    obj.crop(input);
+    obj.rotate();
+    obj.join(input);
     obj.print();
 }
