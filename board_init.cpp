@@ -218,6 +218,39 @@ public:
         }
         return !pass;
     }
+    bool dCheckWin()
+    {
+        bool pass;
+        for (int i = 0; i < 2; i++)
+        {
+            pass = false;
+            for (int j = 0; j < 2; j++)
+            {
+                if (board[j][i] != 0)
+                {
+                    for (int shift = 1; shift != 5; shift++)
+                    {
+                        if (board[j][i] != board[j + shift][i+shift])
+                        {
+                            pass = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                    pass = true;
+                if (!pass)
+                    break;
+            }
+            if (!pass)
+                break;
+        }
+        return !pass;
+    }
+    bool checkWin() {
+        if (hCheckWin() || vCheckWin() || dCheckWin()) return true;
+        else return false;
+    }
 };
 
 int main()
@@ -227,12 +260,14 @@ int main()
     {
         table.board[0][i] = 1;
     }
-    for (int i = 0 ; i < 6 ; i++) {
+    for (int i = 0; i < 6; i++)
+    {
         table.board[i][3] = -1;
-        
     }
-    // table.board[0][3] = -1;
-    cout << table.hCheckWin() << endl;
-    cout << table.vCheckWin() << endl;
+    for (int i = 0 ; i < 5 ; i ++) {
+        table.board[i][i+1] = 1;
+    }
+    table.board[2][3] = 0;
+    cout << table.checkWin()<<endl;
     table.print();
 }
