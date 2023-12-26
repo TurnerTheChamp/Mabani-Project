@@ -10,11 +10,9 @@ class Board
         int grid[3][3];
     public:
         Board() {
-            int counter = 0;
             for (int i = 0; i<6; i++) {
                 for (int j = 0; j<6; j++) {
-                    board[i][j]=counter;
-                    counter++;
+                    board[i][j]=0;
                 }
             }
         }
