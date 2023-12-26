@@ -5,7 +5,8 @@ using namespace std;
 class Board
 {
     const int dim_board = 6;
-public :
+
+public:
     int board[6][6];
 
 private:
@@ -158,9 +159,8 @@ public:
         }
     }
 
-    bool checkWin()
+    bool hCheckWin()
     {
-        // horizontal
         bool pass;
         for (int j = 0; j < dim_board; j++)
         {
@@ -171,15 +171,47 @@ public:
                 {
                     for (int shift = 1; shift != 5; shift++)
                     {
-                        if (board[0][i] != board[0][i + shift])
+                        if (board[j][i] != board[j][i + shift])
                         {
                             pass = true;
                             break;
-                        };
+                        }
                     }
                 }
-                else pass = true;
-                if (!pass) break; 
+                else
+                    pass = true;
+                if (!pass)
+                    break;
+            }
+            if (!pass)
+                break;
+        }
+        return !pass;
+    }
+
+    bool vCheckWin()
+    {
+        bool pass;
+        for (int i = 0; i < dim_board; i++)
+        {
+            pass = false;
+            for (int j = 0; j < 2; j++)
+            {
+                if (board[j][i] != 0)
+                {
+                    for (int shift = 1; shift != 5; shift++)
+                    {
+                        if (board[j][i] != board[j + shift][i])
+                        {
+                            pass = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                    pass = true;
+                if (!pass)
+                    break;
             }
             if (!pass)
                 break;
@@ -191,12 +223,16 @@ public:
 int main()
 {
     Board table;
-    int count = 0 ;
+    for (int i = 0; i < 6; i++)
+    {
+        table.board[0][i] = 1;
+    }
     for (int i = 0 ; i < 6 ; i++) {
-        table.board[0][i]= 1;
-        count ++;
-    }    
-    table.board[0][3] = -1;
-    cout << table.checkWin()<<endl;
+        table.board[i][3] = -1;
+        
+    }
+    // table.board[0][3] = -1;
+    cout << table.hCheckWin() << endl;
+    cout << table.vCheckWin() << endl;
     table.print();
 }
