@@ -247,7 +247,6 @@ public:
             pass = false;
             for (int j = 0; j < 2; j++)
             {
-                winner = board[j][i];
                 if (board[j][i] != 0)
                 {
                     for (int shift = 1; shift != 5; shift++)
@@ -320,9 +319,7 @@ int main()
         table.print();
         cout << endl;
         if (table.checkWin() != 2)
-        {
             break;
-        }
         cout << "grid num> ";
         cin >> grid_num;
         cout << endl;
@@ -339,11 +336,14 @@ int main()
     {
         for (int i = 0; i < 10; i++)
         {
-            cout << "grid num> " << endl;
+            cout << "grid num> ";
             cin >> grid_num;
+            cout << endl;
             table.crop(grid_num);
             table.rotate();
             table.join(grid_num);
+            table.print();
+            cout << endl;
             if (table.checkWin() != 2)
                 break;
         }
